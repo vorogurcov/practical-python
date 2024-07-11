@@ -1,0 +1,5 @@
+Ivan 500
+Elizabeth 300
+Mor 250
+Man 1200
+Lel 900

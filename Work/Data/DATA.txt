@@ -1,0 +1,5 @@
+NAME SURNAME CHILDREN INCOME
+Ivan Frolov 0 500000
+Maria Sitnikova 10 100000
+Abdul Lelmaha 1000 100000000000
+Negr Obichnii 100000 0 

@@ -26,7 +26,7 @@ Python’s only requirement is that indentation within the same block has to be 
 
 If you pass more than one value to print they are separated by spaces.
 
-To get the input use input(). This takes string that will be shown and return written value.
+To get the input use input(). This takes string that will be shown and returns written value.
 
 Sometimes you need to specify an empty code block. The keyword PASS is used for it.
 This is also called a “no-op” statement. It does nothing. 
@@ -76,7 +76,10 @@ LIST.sort() can be used to sort LIST
 
 sorted(LIST) returns sorted list( can be used to make a new list instead )
 
-EMPTY_LIST = [] - creates emptuy list.
+EMPTY_LIST = [] - creates empty list.
+
+Specifically, lists don’t represent vectors/matrices as in MATLAB, Octave, R, etc. 
+However, there are some packages to help you with that (e.g. numpy)
 
 FILE INPUT/OUTPUT
 f = open('text.txt','rt'/'wt') - 'rt' for read text, 'wt' for write text
@@ -98,7 +101,7 @@ Functions:
 	....
     return ...
 
-To access functions from library modules we nned to use import LIB
+To access functions from library modules we need to use import LIB
 
 try - catch equivalent is try - except statement
 	try:
@@ -110,6 +113,13 @@ To raise an eception, use the RAISE statement
 	raise RuntimeError('SOME ERROR')
 
 If the first statement of a function is a string, it serves as documentation. 
+
+def sumcount(n):
+    '''
+    Returns the sum of the first n integers
+    '''
+...
+
 Try typing a command such as help(greeting) to see it displayed.
 
 None type 
@@ -122,10 +132,10 @@ s = ('Penis',100,490.1)
 
 Tuples are often used to represent simple records or structures. Typically, it is a single object
 of multiple parts
-Tuples contents are ordered (line an array). However, the contents can't be modified.
+Tuples contents are ordered (like an array). However, the contents can't be modified.
 
 Tuples are more about packing related items together into a single ENTITY.
-It can be UNPACED
+It can be UNPACKED
 
 arg1,arg2,arg3 = TUPLE_NAME
 The number of variables on the left MUST match the tuple structure.
@@ -150,13 +160,37 @@ import csv - to work with csv
 
 we can work with formats - checkout FORMAT
 
-zip() function - takes multiple sequences and makes an iterator
-that combines them.
-columns = ['col1','col2']
-values = [1,2]
-pairs = zip(columns,values)
-
 d = dict(zip(columns, values)) - common way is to create key/value pairs for construction dictionaries.
 If we need index for some reason in the for loop, we should use ENUMERATE with it
 
-GAMES
+We can use next() with any ITERABLE( f.e. file ) to move to the next element of it.
+Using it with file which was returned with open(...) may help us skit the first line from the file.
+
+While using dictionaries, we can look up a value that might not exist and provide a default value
+in case it doesn't
+
+name = dict.get(key, default)
+
+F.e. 
+  price = prices.get('GAZPROM',0.0)
+
+SETS are useful when you want to get all unique items from the list or do any 
+membership test.
+
+The enumerate function adds an extra counter value to iteration.
+
+The zip function takes multiple sequences and makes an iterator that combines them.
+
+columns = ['col1','col2']
+values = [1,2]
+pairs = zip(columns,values) -- returns list of tuples
+
+After that, we can create a dictionary from these pairs like this:
+dic = dict(pairs) -- creates dictionary from list of tuples
+
+Now, using items = dic.items() we can get list of tuples of the (key, value) pairs
+We can INVERT this list using:
+
+inv = list(zip(dic.values(),dic.keys()))
+Now, we can perform commands such as min(), max() and sorted() on this list which
+works because comparisons on tuples are performed starting from the first item(!!!)
