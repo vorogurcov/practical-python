@@ -194,3 +194,7 @@ We can INVERT this list using:
 inv = list(zip(dic.values(),dic.keys()))
 Now, we can perform commands such as min(), max() and sorted() on this list which
 works because comparisons on tuples are performed starting from the first item(!!!)
+
+COLLECTIONS(!!!)
+If you need to use some dictionary which has structure key-number
+(f.e. NAME-AVG_GRADE) you can use Counter from collections module. It is a dictionary with key-number structure.

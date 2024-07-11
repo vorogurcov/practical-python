@@ -1,21 +1,16 @@
-def getdata(filename):
-  data = []
-  with open(filename,'rt') as file:
-    for line in file:
-      line = line[:-1]
-      elements = line.split(' ')
-      data.append(tuple(elements))
-  return data
+portfolio = [
+    ('GOOG', 100, 490.1),
+    ('IBM', 50, 91.1),
+    ('CAT', 150, 83.44),
+    ('IBM', 100, 45.23),
+    ('GOOG', 75, 572.45),
+    ('AA', 50, 23.15)
+]
 
-def getdictionary(filename):
-  dict = {}
-  with open(filename, 'rt') as file:
-    for line in file:
-      line = line.split(' ')
-      dict[line[0]] = int(line[1])
-  return dict
+from collections import Counter
+total_shares = Counter()
 
-dict = getdictionary('D:\Projects\practical-python\Work\Data\Dictionary.txt')
-print(list(enumerate(dict.keys())))
-#for pos, name in enumerate(dict.keys()):
-#  print(f'{name}\'s position is {pos}')
+for name,shares,price in portfolio:
+  total_shares[name] += shares
+
+print(total_shares['IBM'])
