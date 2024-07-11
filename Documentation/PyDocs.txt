@@ -1,0 +1,162 @@
+Scripting language
+	- computer language that is used for scriptin.
+
+Script is a relatively short and simple set of instructions
+A script is usually NOT compiled. Generally, they are interpreted directly from source code.
+
+If you start Python, you get an INTERACTIVE mode. The written code can not be edited,compiled or runned.
+This is called read-eval-print-loop(REPL) cycle.
+
+The '_' symbol holds the last result IN THE INTERACTIVE MODE.
+
+Comments start with #
+
+Variables do not need to be declared with the type of the value. 
+The type is associated with the value on the right hand side, not name of the variable.
+
+Python is dynamically typed. The perceived “type” of a variable might change as a program 
+executes depending on the current value assigned to it.
+
+Language statements are always lower-case.
+
+Indentation is used to denote groups of statements that go together. That means that you HAVE TO put spaces after
+cycles to show that some statements are grouped as repeated operation.
+
+Python’s only requirement is that indentation within the same block has to be consistent.
+
+If you pass more than one value to print they are separated by spaces.
+
+To get the input use input(). This takes string that will be shown and return written value.
+
+Sometimes you need to specify an empty code block. The keyword PASS is used for it.
+This is also called a “no-op” statement. It does nothing. 
+It serves as a placeholder for statements, possibly to be added later.
+
+In Python, there is a concept of TRUTHY and FALSY values. They will be evaluated to the True and False bool type
+respectively if we use them as an expression.
+
+Strings are written with '' or "". If we want to take all the text from multiple lines we can use ''' '''
+
+Using [] we can take one symbol or substring [:5] - all symbols up to 5, [5:] all symbols from the 5
+If we use something like [-5:] it will take 5 symbols from the end of the string.
+
+len() - returns length
+Membership test - SYMB in (or not in) STRING
+Replication - rep = STRING * 5 (Text with 5 repeated STRING data)
+
+strip() - stripping any leading/trailing white space.
+lower()/upper() - case conversion.
+
+String are IMMUTABLE(their value can not be changed). All operations and methods that manipulate string data,
+always create new strings.
+
+str() - converts value to string.
+
+f-string is a format string that can embed the values of variables into it.
+It is created with f prefix : f'Super duper value: {value}'
+
+There is a special module 're' that to support any kind of advanced pattern matching
+
+dir(VARIABLE) can be used to get a list of all operations with the variables of the VARIABLE'S type
+
+List is a primary type for holding values in python. It is created using following syntax:
+	names = ['T','Y','P','E']
+Some methods can also return lists.
+
+Items in the list CAN be changed. You can get its length, check membership.
+
+Use "for SMTH in LIST" to iterate through LIST (similar to foreach)
+index() returns first occur
+
+LIST.remove() can be used to remove concrete elements from list.
+del LIST[index] can be used to delete element with concrete index.
+If there are more than one occurence of item, remove() will delete only the first one.
+
+LIST.sort() can be used to sort LIST
+
+sorted(LIST) returns sorted list( can be used to make a new list instead )
+
+EMPTY_LIST = [] - creates emptuy list.
+
+FILE INPUT/OUTPUT
+f = open('text.txt','rt'/'wt') - 'rt' for read text, 'wt' for write text
+
+FILE.read() - reads data.
+FILE.write('TEXT') - write data
+
+FILE.close()
+
+with open(filename, 'rt') as file: - with statement is preferred approach
+	...
+	...
+	...
+
+Pandas --- functions for reading CSV filex 
+
+Functions:
+    def FUNC_NAME(arg1,arg2,...)
+	....
+    return ...
+
+To access functions from library modules we nned to use import LIB
+
+try - catch equivalent is try - except statement
+	try:
+	    ...
+	except EXCEPTION:
+            ...
+
+To raise an eception, use the RAISE statement
+	raise RuntimeError('SOME ERROR')
+
+If the first statement of a function is a string, it serves as documentation. 
+Try typing a command such as help(greeting) to see it displayed.
+
+None type 
+email = None
+None is often used as a placeholder for optional or missing value. 
+It evaluates as False in conditionals.
+
+Tuple is a collection of values grouped together.
+s = ('Penis',100,490.1)
+
+Tuples are often used to represent simple records or structures. Typically, it is a single object
+of multiple parts
+Tuples contents are ordered (line an array). However, the contents can't be modified.
+
+Tuples are more about packing related items together into a single ENTITY.
+It can be UNPACED
+
+arg1,arg2,arg3 = TUPLE_NAME
+The number of variables on the left MUST match the tuple structure.
+
+Dictionary is mapping of keys to values. Dictionaries are useful when there are MANY different values
+and those values might be modified or manipulated.
+
+dict = {
+'key1':value1,
+'key2':value2,
+'key3':value3
+}
+
+Sets - collection of unordered unique items
+set = {'arg1','arg2','arg3','arg4'}
+
+If we have list = {arg1,arg1,arg2} and we want to get unique items, we can convert it to set 
+unique = set(list) 
+With set, we can perform union,intersection and difference operations(and others)
+
+import csv - to work with csv
+
+we can work with formats - checkout FORMAT
+
+zip() function - takes multiple sequences and makes an iterator
+that combines them.
+columns = ['col1','col2']
+values = [1,2]
+pairs = zip(columns,values)
+
+d = dict(zip(columns, values)) - common way is to create key/value pairs for construction dictionaries.
+If we need index for some reason in the for loop, we should use ENUMERATE with it
+
+GAMES
