@@ -198,3 +198,296 @@ works because comparisons on tuples are performed starting from the first item(!
 COLLECTIONS(!!!)
 If you need to use some dictionary which has structure key-number
 (f.e. NAME-AVG_GRADE) you can use Counter from collections module. It is a dictionary with key-number structure.
+
+From Counter we can get n most common values like this : counter.most_common(n)
+defaultdict(list)
+
+If we construct defaultdict with list as a default factory(???) we will get a dictionary-like structure
+that has following structure:
+[ (key1, [data1,data2]), (key2, [data3,data4,data5]) ]
+Each time we encounter new key, the list is being attached to it.
+
+A list comprehension creates a new list by applying an operation to each element of a sequence.
+
+EXAMPLE:
+x = [1,2,3,4,5]
+x2 = [el*el for el in x]
+The general syntax is: [ <expression> for <variable_name> in <sequence> ].
+
+We can also filter like this:
+b = [2*x for x in a if x > 0 ]
+
+If we change [] tp {} we will get SET COMPREHENSION
+
+If you specify key:value pairs, you can build a dictionary:
+
+dik = {name:0 for name in set(names)}
+
+In Python, assignment operations NEVER MAKE A COPY of the value being assigned(!!!)
+
+Use the is operator to check if two values are exactly the same object.
+Operator is compares the object identity (an integer). The identity can be obtained using id().
+
+Shallow copies:
+For lists and dicts we have methods for copying. F.e.
+a = [1,2,[100,102],4]
+b = list(a)
+
+b IS NOT a, thus we can modify it and it will not affect a's contents. HOWEVER, the list inside the list is STILL
+being shared. That means that if we modify it from b it will be modified in a too(!) That is called a SHALLOW COPY
+
+Sometimes you need to make a copy of an object and all the objects contained within it. 
+You can use the copy module for this: 
+
+import copy
+b = copy.deepcopy(a)
+
+To get value type we have to use type()
+
+Object has a specific type:
+if isinstance(a, list):
+    print('a is a list')
+
+Numbers, strings, lists, functions, exceptions, classes, instances, etc. are all objects. 
+It means that all objects that can be named can be passed around as data, placed in containers, etc., 
+without any restrictions. There are no special kinds of objects. 
+Sometimes it is said that all objects are “first-class”.
+
+You can also add optional type hints to function definitions.
+
+def function(name: string) -> dict:
+  ...
+
+The hints do nothing operationally. They are purely informational. 
+However, they may be used by IDEs, code checkers, and other tools to do more.
+
+def read_prices(filename, debug=False): #debug is an optional parameter and set false on a default
+  ...
+
+We can return multiple values by returning it in a TUPLE(!)
+
+If you must modify a global variable you must declare it as such.
+
+name = 'Dave'
+
+def spam():
+    global name #HERE WE USE GLOBAL(!!!)
+    name = 'Guido' # Changes the global name above
+
+Exception handling:
+
+we use try - except syntax.
+we use raise Exception to raise an exception.
+
+Exceptions propagate to the first matching except.
+
+finally statement
+It specifies code that must run regardless of whether or not an exception occurs.
+
+with statement
+with defines a usage context for a resource. When execution leaves that context, resources are released. 
+with only works with certain objects that have been specifically programmed to support it.
+
+MODULES
+
+A module is a collection of named values and is sometimes said to be a namespace. 
+The names are all of the global variables and functions defined in the source file. 
+After importing, the module name is used as a prefix. Hence the namespace.
+
+import foo
+
+a = foo.grok(2)
+b = foo.spam('Hello')
+
+Ways to import module/functions from module:
+
+import math
+# vs
+import math as m
+# vs
+from math import cos, sin
+
+(!!!)Caution: A common confusion arises if you repeat an import statement after changing the source code 
+for a module. Because of the module cache sys.modules, repeated imports always return the previously 
+loaded module–even if a change was made. The safest way to load modified code into Python is to quit 
+and restart the interpreter.(!!!)
+
+Even though there is no main function or method in python, it still has MAIN MODULE that executes first.
+
+It is standard practice for modules that run as a main script to use this convention:
+
+# prog.py
+...
+if __name__ == '__main__':
+    # Running as the main program ...
+    statements
+    ...
+
+Statements in if statement become the MAIN program
+
+Any Python file can either run as main or as a library import(!)
+
+Common program template for writing a Python program:
+
+# Main function
+def main():
+    ...
+
+if __name__ == '__main__':
+    main()
+
+Use the class statement to define a new object.
+
+class Player:
+  def func():
+   ...
+
+  ...
+
+We can initialize data in class.This data is initialized by the __init__().
+
+class Player:
+    def __init__(self, x, y):
+        # Any value stored on `self` is instance data
+        self.x = x
+        self.y = y
+        self.health = 100
+
+By convention, the instance is called self. However, the actual name used is unimportant. 
+The object is always passed as the first argument. 
+It is merely Python programming style to call this argument self.
+
+
+Classes do not define a scope of names.
+
+class Player:
+    ...
+    def move(self, dx, dy):
+        self.x += dx
+        self.y += dy
+
+    def left(self, amt):
+        move(-amt, 0)       # NO. Calls a global `move` function
+        self.move(-amt, 0)  # YES. Calls method `move` from above.
+If you want to operate on an instance, you always refer to it explicitly (e.g., self).
+
+INHERITANCE
+
+Inheritance is used to specialize existing objects:
+
+class Parent:
+    ...
+
+class Child(Parent):
+    ...
+
+Sometimes a class extends an existing method, but it wants to use the original 
+implementation inside the redefinition. For this, use super():
+
+class Stock:
+    ...
+    def cost(self):
+        return self.shares * self.price
+    ...
+
+class MyStock(Stock):
+    def cost(self):
+        # Check the call to `super`
+        actual_cost = super().cost()
+        return 1.25 * actual_cost
+
+If __init__ is redefined, it is essential to initialize the parent.
+
+ def __init__(self, name, shares, price, factor):
+        # Check the call to `super` and `__init__`
+        super().__init__(name, shares, price) #INITIALIZE THE PARENT
+        self.factor = factor
+
+__str__ and __repr__ are used to create string conversion of object and representation string conversion.
+
+Note: The convention for __repr__() is to return a string that, when fed to eval(), 
+will recreate the underlying object. If this is not possible, some kind of easily readable 
+representation is used instead.
+
+Mathematical operators involve calls to the following methods.
+F.e. __sub__(b)
+
+Special Methods for Item Access
+These are the methods to implement containers.
+
+len(x)      x.__len__()
+x[a]        x.__getitem__(a)
+x[a] = v    x.__setitem__(a,v)
+del x[a]    x.__delitem__(a)
+
+There is an alternative way to access, manipulate and manage attributes.
+
+getattr(obj, 'name')          # Same as obj.name
+setattr(obj, 'name', value)   # Same as obj.name = value
+delattr(obj, 'name')          # Same as del obj.name
+hasattr(obj, 'name')          # Tests if attribute exists
+
+INNER WORKINGS OF PYTHON OBJECTS
+
+Within a module, a dictionary holds all of the global variables and functions.
+We can get the dictionary by 
+   FILENAME.__dict__ or global()
+
+User defined objects also use dictionaries for both instance data and classes. 
+In fact, the entire object system is mostly an extra layer that’s put on top of dictionaries.
+
+A dictionary holds the instance data, __dict__.
+
+s = Stock('GOOG', 100, 490.1)
+>>> s.__dict__
+{'name' : 'GOOG', 'shares' : 100, 'price': 490.1 }
+
+The instance data, self.__dict__, looks like this:
+
+A separate dictionary also holds the methods:
+  The dictionary is in 
+
+>>>Stock.__dict__.
+{
+    'cost': <function>,
+    'sell': <function>,
+    '__init__': <function>
+}
+
+Instances and classes are linked together. The __class__ attribute refers back to the class.
+
+Python precomputes an inheritance chain and stores it in the MRO attribute on the class. You can view it.
+ClassName.__mro__
+(Method resolution order)
+
+Private Attributes
+Any attribute name with leading _ is considered to be private.
+As a general rule, any name with a leading _ is considered internal implementation 
+whether it’s a variable, a function, or a module name. If you find yourself using such names 
+directly, you’re probably doing something wrong. Look for higher level functionality.
+
+If you want to set value with specifical checking of it's type, it is good to make this value PROPERTY.
+Normal attribute access now triggers the getter and setter methods under @property and @shares.setter.
+
+@property
+    def shares(self):
+        return self._shares
+
+@shares.setter
+    def shares(self, value):
+        if not isinstance(value, int):
+            raise TypeError('Expected int')
+        self._shares = value
+
+
+The @ syntax is known as “decoration”. It specifies a modifier that’s applied to the function 
+definition that immediately follows.
+
+__slots__ Attribute
+You can restrict the set of attributes names.
+
+class Stock:
+    __slots__ = ('name','_shares','price')
+    def __init__(self, name, shares, price):
+        self.name = name
+        ...
